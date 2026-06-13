@@ -33,14 +33,14 @@ import tempfile
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 # 3. STREAMLIT PAGE CONFIGURATION
-st.set_page_config(page_title="Offline PDF Chatbot", page_icon="📄", layout="centered")
-st.title("📄 Chat with your PDF (100% Local)")
+st.set_page_config(page_title="Offline PDF Chatbot", page_icon="[``]", layout="centered")
+st.title(" Chat with your PDF (100% Local)")
 st.write("Upload a PDF document and ask questions locally without your data leaving your computer.")
 
 # 4. SIDEBAR CONFIGURATION
 with st.sidebar:
     st.header("Local Settings")
-    st.info("Ollama is handling everything locally!", icon="🤖")
+    st.info("Ollama is handling everything locally!", icon=":)")
     
     # Set gemma2:2b as the default option
     llm_model = st.selectbox(
@@ -74,7 +74,7 @@ if uploaded_file is not None:
             vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
             retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
             
-            st.success("PDF processed successfully! Ask away.", icon="✅")
+            st.success("PDF processed successfully! Ask away.", icon="")
         except Exception as e:
             st.error(f"Error processing PDF. Ensure Ollama is running and models are downloaded. Error: {e}")
             st.stop()
@@ -129,7 +129,7 @@ if uploaded_file is not None:
                     
                     sources = response.get("context", [])
                     if sources:
-                        with st.expander("📄 Sources"):
+                        with st.expander(" Sources"):
                             for doc in sources:
                                 page = doc.metadata.get("page", 0)
                                 snippet = doc.page_content[:200]
